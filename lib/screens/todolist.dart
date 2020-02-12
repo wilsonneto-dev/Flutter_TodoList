@@ -23,6 +23,7 @@ class TodoListState extends State<TodoList> {
       body: todoListItems(),
       floatingActionButton: FloatingActionButton(
         onPressed: null,
+        child: Icon(Icons.add),
         tooltip: "Add To-Do",
       ),
     );
@@ -34,15 +35,16 @@ class TodoListState extends State<TodoList> {
       itemBuilder: (BuildContext context, int position) {
         return Card(
           color: Colors.white,
+          margin: EdgeInsets.all(5),
           elevation: 2.0,
           child: ListTile(
             leading: CircleAvatar(
-              backgroundColor: Colors.red,
+              backgroundColor: getColor(this.todos[position].priority),
               child: Text(this.todos[position].id.toString()),
             ),
             title: Text(this.todos[position].title),
             subtitle: Text(this.todos[position].date),
-            trailing: Icon(Icons.track_changes),
+            /* trailing: Icon(Icons.track_changes), */
             onTap: () {
               debugPrint("taped in ${this.todos[position].title}");
             },
@@ -64,5 +66,20 @@ class TodoListState extends State<TodoList> {
         });
       });
     });
+  }
+
+  Color getColor(int priority) {
+    switch (priority) {
+      case 1:
+        return Colors.red;
+        break;
+      case 2:
+        return Colors.orange;
+        break;
+      case 2:
+      default:
+        return Colors.green;
+        break;      
+    }
   }
 }
