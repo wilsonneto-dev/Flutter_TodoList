@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:to_do/model/todo.dart';
 import 'package:to_do/util/dbhelper.dart';
+import 'package:to_do/screens/tododetail.dart';
 
 class TodoList extends StatefulWidget {
   @override
@@ -47,6 +48,7 @@ class TodoListState extends State<TodoList> {
             /* trailing: Icon(Icons.track_changes), */
             onTap: () {
               debugPrint("taped in ${this.todos[position].title}");
+              navigateToDetail(this.todos[position]);
             },
           )
         );
@@ -80,6 +82,15 @@ class TodoListState extends State<TodoList> {
       default:
         return Colors.green;
         break;      
+    }
+  }
+
+  void navigateToDetail(Todo todo) async {
+    bool result = await Navigator.push(context, MaterialPageRoute(
+      builder: (ctx) => TodoDetail(todo)
+    ));
+    if(result == true) {
+      getData();
     }
   }
 }

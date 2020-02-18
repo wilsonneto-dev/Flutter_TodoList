@@ -27,6 +27,9 @@ class Todo {
       _description = newDescription;
     }
   }
+  set priority (int newPriority) {
+    _priority = priority;
+  }
 
   set date(String newDate) {
     _date = newDate;
